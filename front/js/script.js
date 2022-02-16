@@ -4,9 +4,24 @@ fetch("http://localhost:3000/api/products")
     .then((res) => res.json())
     .then((data) => addProducts(data))
 
-//Les produits ont été récupérés via la console          
+//Les produits ont été récupérés via la console    
+
+//altTxt: "Photo d'un canapé bleu, deux places"
+//colors: (3) ['Blue', 'White', 'Black']
+//description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+// mollit anim id est laborum."
+//imageUrl: "http://localhost:3000/images/kanap01.jpeg"
+//name: "Kanap Sinopé"
+//price: 1849
+//_id: "107fb5b75607497b96722bda5b504926"
 
 function addProducts(data) {
+   //const _id = Kanap[0]._id
+   //const imageUrl = Kanap[0].imageUrl
+   //const altTxt = Kanap[0].altTxt
+   //const name = Kanap[0].name
+   //const description = Kanap[0].description
+   
    data.forEach((Kanap) => {
    const { _id, imageUrl, altTxt, name, description } = Kanap
    const anchor = makeAnchor(_id)
@@ -19,12 +34,16 @@ function addProducts(data) {
    appendArticleToAnchor(anchor, article)
    })
 }
-     //fin de la liste de la gamme d'articles exclusifs
+
 function appendElementsToArticle(article, array) {
     array.forEach((items) => {
         article.appendChild(items)
     })
+     //article.appendChild(image)
+     //article.appendChild(h3)
+     //article.appendChild(p)
 }
+
     // Insertion de l'élément "a"
 function makeAnchor(id) {
   const anchor = document.createElement("a")
