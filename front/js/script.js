@@ -47,10 +47,11 @@ function appendElementsToArticle(article, array) {
     // Insertion de l'élément "a"
 function makeAnchor(id) {
   const anchor = document.createElement("a")
-  anchor.href = "./product.html?id" +id
+  anchor.href = "./product.html?id=" +id
   return anchor
 }
-    // Insertion de l'élément "article"
+  
+  // Insertion de l'élément "article"
 function appendArticleToAnchor(anchor, article) { 
      const items = document.querySelector("#items") 
     if (items != null) {
@@ -58,7 +59,8 @@ function appendArticleToAnchor(anchor, article) {
         anchor.appendChild(article)
     }
 }
-    // Insertion de l'image
+
+ // Insertion de l'image
 function makeImage(imageUrl, altTxt) {
     const image = document.createElement("img")
     image.src = imageUrl
@@ -67,6 +69,7 @@ function makeImage(imageUrl, altTxt) {
     image.removeAttribute("style")
     return image
 }
+
     // Insertion du titre "h3"
 function makeH3(name) {
     const h3 = document.createElement("h3")
@@ -74,6 +77,7 @@ function makeH3(name) {
     h3.classList.add("productName")
     return h3
 }
+
     // Insertion de la description "p"
 function makeParagraph(description) {
     const p = document.createElement("p")
