@@ -2,6 +2,10 @@
     "recommendations": [
         "coenraads.bracket-pair-colorizer-2",
         "coenraads.bracket-pair-colorizer",
-        "kiteco.kite"
+        "kiteco.kite",
+        "formulahendry.auto-rename-tag",
+        "usernamehw.errorlens",
+        "dsznajder.es7-react-js-snippets",
+        "GitHub.copilot"
     ]
 }

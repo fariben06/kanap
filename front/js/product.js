@@ -51,36 +51,35 @@ function makePrice(price) {
 
 function makeDescription(description) {
     // Insertion de la description "p"
-    const p = document.querySelector("#description")
+    const p = document.querySelector("#description") // requête de document Description du sélecteur
     if (p != null) p.textContent = description
 }
-
+// fonction crée des couleurs
 function makeColors(colors) {
     
     //Interroger les couleurs du sélecteur
     const select = document.querySelector("#colors")
     if (select != null) {
-        colors.forEach((color) => {
+        colors.forEach((color) => { // couleurs pour chaque couleur
         const option = document.createElement("option")
         option.value = color
         option.textContent = color
-        select.appendChild(option)
+        select.appendChild(option) // sélectionnez l'option d'ajout d'enfant
         })
     }
 }
-    // click Ajouté un article au panier
-    
+    // click Ajouté un article au panier 
 const button = document.querySelector("#addToCart")
 button.addEventListener("click", handleClick) 
-
+// poignée de la fonction Clic
 function handleClick() {
     // requête Couleurs du sélecteur et quantité
     const color = document.querySelector("#colors").value
     const quantity = document.querySelector("#quantity").value
     //si la commande "couleur" "quantité"  n'est pas valide "return"
     if (isOrderInValid(color, quantity)) return
-    saveOrder(color, quantity)   
-    redirectToCart()     
+    saveOrder(color, quantity) // enregistre la couleur de la commande, et la quantité
+    redirectToCart()  // rediriger vers le panier 
 }
     // sauvegarder le detail de la commande
 function saveOrder(color, quantity) {
@@ -100,7 +99,7 @@ function isOrderInValid(color, quantity) {
      if (color == null || color === "" || quantity == null || quantity == 0) {
         //  alert("veuillez sélectionner une couleur et une quantité")
         alert("please select a color and quantity")
-        return true
+        return true // renvoie vrai
     }
 }
 function redirectToCart() {

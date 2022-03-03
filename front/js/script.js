@@ -3,7 +3,6 @@
 fetch("http://localhost:3000/api/products")
     .then((res) => res.json())
     .then((data) => addProducts(data))
-
 //Les produits ont été récupérés via la console    
 
 //altTxt: "Photo d'un canapé bleu, deux places"
@@ -15,6 +14,7 @@ fetch("http://localhost:3000/api/products")
 //price: 1849
 //_id: "107fb5b75607497b96722bda5b504926"
 
+// fonction ajouter des données produits
 function addProducts(data) {
    //const _id = Kanap[0]._id
    //const imageUrl = Kanap[0].imageUrl
@@ -26,7 +26,7 @@ function addProducts(data) {
    const { _id, imageUrl, altTxt, name, description } = Kanap
    const anchor = makeAnchor(_id)
    const article = document.createElement("article")
-   const image = makeImage(imageUrl, altTxt)
+   const image = makeImageDiv(imageUrl, altTxt)
    const h3 = makeH3(name)
    const p = makeParagraph(description)
 
@@ -50,7 +50,7 @@ function makeAnchor(id) {
   anchor.href = "./product.html?id=" +id
   return anchor
 }
-  
+  // fonction ajoute l'article à l'ancre
   // Insertion de l'élément "article"
 function appendArticleToAnchor(anchor, article) { 
      const items = document.querySelector("#items") 
@@ -61,7 +61,7 @@ function appendArticleToAnchor(anchor, article) {
 }
 
  // Insertion de l'image
-function makeImage(imageUrl, altTxt) {
+function makeImageDiv(imageUrl, altTxt) {
     const image = document.createElement("img")
     image.src = imageUrl
     image.alt = altTxt
