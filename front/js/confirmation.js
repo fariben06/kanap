@@ -1,10 +1,9 @@
 //Récupération de l'id via les paramètres de l'url
-    const orderId = getOrderId()
-    // affiche l'identifiant de la commande
-    displayOrderId(orderId)
-    // supprimer tout le cache
-    removeAllCache()
-    // obtenir l'identifiant de la commande
+const orderId = getOrderId()
+// affiche l'identifiant de la commande
+displayOrderId(orderId)
+
+// obtenir l'identifiant de la commande
 function getOrderId() {
     // chaîne de requête = window.location.search
     const queryString = window.location.search
@@ -20,9 +19,3 @@ function displayOrderId(orderId) {
     const orderIdElement = document.getElementById("orderId")
     orderIdElement.textContent = orderId
 }
-
-// supprimer tout le cache de window.localStorage
-function removeAllCache() {
-    const cache = window.localStorage
-    cache.clear()
-} // vider le cache

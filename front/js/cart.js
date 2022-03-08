@@ -17,13 +17,14 @@ orderButton.addEventListener("click", (e) => submitForm(e))
 //récupérer les éléments du cache
 function retrievItemsFromCache() {
   const numberOfItems = localStorage.length
-  for (let i = 0; i < numberOfItems; i++){
+  for (let i = 0; i < numberOfItems; i++) {
     // récupère la clé de stockage local de l'article
     const item = localStorage.getItem(localStorage.key(i)) || ""
     const itemObject = JSON.parse(item)
     cart.push(itemObject) // objet d'envoi de panier
   }
 }
+
 //  affichage de la fonction Article
 function displayItem(item) {
   const article = makeArticle(item)
@@ -37,23 +38,26 @@ function displayItem(item) {
   displayTotalQuantity()
   displayTotalPrice()
 }
+
 // Quantité totale d'articles au panier
 function displayTotalQuantity() {
   const totalQuantity = document.querySelector("#totalQuantity")
   // Sélecteur de requête de document de quantité totale
-  const total = cart.reduce((total, item) => total + item.quantity, 0) 
+  const total = cart.reduce((total, item) => total + item.quantity, 0)
   totalQuantity.textContent = total // Texte de quantité Contenu total
 }
+
 // totale prix
 function displayTotalPrice() {
   // requête de document Prix total Sélecteur Prix total
   const totalPrice = document.querySelector("#totalPrice")
-  const total = cart.reduce((total, item) => total + item.price * item.quantity, 0) 
+  const total = cart.reduce((total, item) => total + item.price * item.quantity, 0)
   totalPrice.textContent = total // Contenu du texte du prix = total
 }
+
 // créer un élément de contenu du panier
-function makeCartContent(item){
-   // Insertion de l'élément "div" pour la description produit
+function makeCartContent(item) {
+  // Insertion de l'élément "div" pour la description produit
   const cardItemContent = document.createElement("div")
   cardItemContent.classList.add("cart__item__content")
   const description = makeDescription(item)
@@ -62,6 +66,7 @@ function makeCartContent(item){
   cardItemContent.appendChild(settings)
   return cardItemContent
 }
+
 // la fonction crée l'élément Paramètres
 function makeSettings(item) {
   // Insertion de l'élément "div"
@@ -73,6 +78,7 @@ function makeSettings(item) {
   addDeleteToSettings(settings, item)
   return settings
 }
+
 // fonction ajouter l'élément Supprimer dans les paramètres
 function addDeleteToSettings(settings, item) {
   // Insertion de l'élément "div"
@@ -86,6 +92,7 @@ function addDeleteToSettings(settings, item) {
   div.appendChild(p)
   settings.appendChild(div)
 }
+
 // enregistrer l'id et la couleur séléctionnés par le bouton supprimer
 function deleteItem(item) {
   const itemToDelete = cart.findIndex(
@@ -97,20 +104,21 @@ function deleteItem(item) {
   deleteDataFromCache(item)
   deleteArticleFromPage(item)
 }
+
 // fonction supprimer l'article de la page (élément)
 function deleteArticleFromPage(item) {
   const articleToDelete = document.querySelector(
     `article[data-id="${item.id}"][data-color="${item.color}"]`
-    )
-    articleToDelete.remove()
-  } // filtrer l'élément cliqué par le bouton supprimer
+  )
+  articleToDelete.remove()
+} // filtrer l'élément cliqué par le bouton supprimer
 // fonction ajouter la quantité à l'élément Paramètres
 function addQuantityToSettings(settings, item) {
   // Insertion de l'élément "div"
   const quantity = document.createElement("div");
   quantity.classList.add("cart__item__content__settings__quantity")
   const p = document.createElement("p")
-   // Insertion de "Qté : "
+  // Insertion de "Qté : "
   p.textContent = "Qté : "
   quantity.appendChild(p)
   const input = document.createElement("input")
@@ -126,37 +134,42 @@ function addQuantityToSettings(settings, item) {
   quantity.appendChild(input)
   settings.appendChild(quantity)
 }
+
 // mise à jour l'id du prix et la quantité, nouvelle valeur, article
 function updatePriceAndQuantity(id, newValue, item) {
   const itemToUpdate = cart.find((item) => item.id === id)
   itemToUpdate.quantity = Number(newValue)
+  console.log(item, itemToUpdate)
   item.quantity = itemToUpdate.quantity
   displayTotalQuantity()
   displayTotalPrice()
   saveNewDataToCache(item)
 }
+
 // fonction supprime les données du cache
 function deleteDataFromCache(item) {
-   const key = `${item.id}-${item.color}`
-   localStorage.removeItem(key)
+  const key = `${item.id}-${item.color}`
+  localStorage.removeItem(key)
 }
+
 // enregistrer les nouvelles données dans le cache "élément"
 function saveNewDataToCache(item) {
   const dataToSave = JSON.stringify(item)
   const key = `${item.id}-${item.color}`
   localStorage.setItem(key, dataToSave)
 }
+
 // Insertion de l'élément "div" pour la description produit
 function makeDescription(item) {
   const description = document.createElement("div")
   description.classList.add("cart__item__content__description")
-   // Insertion du titre h2
+  // Insertion du titre h2
   const h2 = document.createElement("h2")
   h2.textContent = item.name
   // Insertion de la couleur
   const p = document.createElement("p")
   p.textContent = item.color;
-   // Insertion du prix
+  // Insertion du prix
   const p2 = document.createElement("p")
   p2.textContent = item.price + " €"
   // ajout de la description Enfant h2, p, p2
@@ -165,10 +178,12 @@ function makeDescription(item) {
   description.appendChild(p2)
   return description
 }
+
 // Création de la balise "article" et insertion dans la section
 function displayArticle(article) {
   document.querySelector("#cart__items").appendChild(article)
 }
+
 function makeArticle(item) {
   const article = document.createElement("article")
   article.classList.add("card__item")
@@ -177,7 +192,8 @@ function makeArticle(item) {
   article.dataset.color = item.color
   return article
 }
-  // la fonction crée un élément Image
+
+// la fonction crée un élément Image
 function makeImageDiv(item) {
   // Insertion de l'élément "div" pour l'image produit
   const div = document.createElement("div")
@@ -189,22 +205,24 @@ function makeImageDiv(item) {
   div.appendChild(image)
   return div
 }
-  // fonction soumettre le formulaire
+
+// fonction soumettre le formulaire
 function submitForm(e) {
   // empêcher la valeur par défaut
   e.preventDefault()
   if (cart.length === 0) {
-    alert ("please select items to buy")
-    return
+    alert("please select items to buy")
+    return false;
   }
-  
-  // si le formulaire de retour n'est pas valide "return"
-  if (isFormInvalid()) return
-  if (isEmailInvalid()) return
 
-  const body = makeRequestBody() 
-    // j'envoie le formulaire + localStorage (sendFormData) 
-    // ... que j'envoie au serveur
+  // si le formulaire de retour n'est pas valide "return"
+  if (!fields.every(valid)) {
+    return false;
+  }
+
+  const body = makeRequestBody()
+  // j'envoie le formulaire + localStorage (sendFormData)
+  // ... que j'envoie au serveur
   fetch("http://localhost:3000/api/products/order", {
     method: "POST",
     body: JSON.stringify(body),
@@ -212,116 +230,75 @@ function submitForm(e) {
       "content-type": "application/json"
     }
   })
-    .then((res) => res.json())
+    .then((res) => {
+      if(res.ok) {
+        return res.json();
+      }
+
+      throw res.error();
+    })
     .then((data) => {
-  const orderId = data.orderId
-     window.location.href = "/html/confirmation.html" + "?orderId=" + orderId
-  })
-  // fin eventListener postForm
-  // fin envoi du formulaire postForm
-  .catch((err) => console.error(err))
+      const orderId = data.orderId;
+      localStorage.clear();
+      window.location.href = "/html/confirmation.html" + "?orderId=" + orderId
+    })
+    // fin eventListener postForm
+    // fin envoi du formulaire postForm
+    .catch((err) => console.error(err))
 }
-   //Instauration formulaire avec regex
-   // fonction si email invalide
-function isEmailInvalid() {
-  const email = document.querySelector("#email").value
-  const regex = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/
-  if (regex.test(email) === false) { 
-  // alerte Veuillez entrer un email valide
-    alert("Please enter valid email") 
-    return true // renvoie vrai
+
+const form = document.querySelector(".cart__order__form");
+
+const charRegExp = /^[a-zA-Z ,.'-]+$/; // laisser char nouvelle RegExp
+const addressRegExp = /^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+/;// laisse l'adresse RegExp
+const emailRegExp = /^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$/;
+
+const fields = [
+  {
+    input: form.elements.firstName,
+    regexp: charRegExp,
+    message: 'Veuillez saisir un prénom valide.'
+  },
+  {
+    input: form.elements.lastName,
+    regexp: charRegExp,
+    message: 'Veuillez saisir un nom valide.'
+  },
+  {
+    input: form.elements.address,
+    regexp: addressRegExp,
+    message: 'Veuillez saisir un adresse valide.'
+  },
+  {
+    input: form.elements.city,
+    regexp: charRegExp,
+    message: 'Veuillez saisir un ville valide.'
+  },
+  {
+    input: form.elements.email,
+    regexp: emailRegExp,
+    message: 'Veuillez saisir une email valide.'
+  },
+];
+
+function valid(field) {
+  let errorMsg = field.input.nextElementSibling;
+
+  if (field.regexp.test(field.input.value)) {
+    errorMsg.innerHTML = '';
+    return true;
   }
-  return false // renvoie faux
+
+  errorMsg.innerHTML = field.message;
+  return false;
 }
 
-// si le formulaire est incomplet
-function isFormInvalid() {
-  const form = document.querySelector(".cart__order__form")
-  const inputs = form.querySelectorAll("input")
-  inputs.forEach((input) => {
-    if (input.value === "") {
-      alert("Please fill all the fields")
-      return true // renvoie vrai
-      // Veuillez remplir tous les champs
-    } 
-    return false // renvoie faux
-  })
-}
-
-//Instauration formulaire avec regex
-function getForm() {
-  // Ajout des Regex
-  // laisser le formulaire de demande de document Sélecteur de commande de panier
-  let form = document.querySelector(".cart__order__form");
-  //Création des expressions régulières
-  let charRegExp = new RegExp("^[a-zA-Z ,.'-]+$"); // laisser char nouvelle RegExp
-  let addressRegExp = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");// laisse l'adresse RegExp
-
-  // Ecoute de la modification du prénom
-  form.firstName.addEventListener('change', function() {
-      validFirstName(this);
+fields.forEach(field => {
+  field.input.addEventListener('input', () => {
+    valid(field);
   });
+});
 
-  // Ecoute de la modification du Nom
-  form.lastName.addEventListener('change', function() {
-      validLastName(this);
-  });
-
-  // Ecoute de la modification d'adresse
-  form.address.addEventListener('change', function() {
-      validAddress(this);
-  });
-
-  // Ecoute de la modification de la Ville
-  form.city.addEventListener('change', function() {
-      validCity(this);
-  });
-
-  //validation du Prénom
-  const validFirstName = function(inputFirstName) {
-      let firstNameErrorMsg = inputFirstName.nextElementSibling;
-
-      if (charRegExp.test(inputFirstName.value)) {
-          firstNameErrorMsg.innerHTML = '';
-      } else {
-          firstNameErrorMsg.innerHTML = 'Veuillez renseigner Prénom.';
-      }
-  };
-
-  //validation du Nom
-  const validLastName = function(inputLastName) {
-      let lastNameErrorMsg = inputLastName.nextElementSibling;
-
-      if (charRegExp.test(inputLastName.value)) {
-          lastNameErrorMsg.innerHTML = '';
-      } else {
-          lastNameErrorMsg.innerHTML = 'Veuillez renseigner votre Nom.';
-      }
-  };
-
-  //validation de l'adresse
-  const validAddress = function(inputAddress) {
-      let addressErrorMsg = inputAddress.nextElementSibling;
-
-      if (addressRegExp.test(inputAddress.value)) {
-          addressErrorMsg.innerHTML = '';
-      } else {
-          addressErrorMsg.innerHTML = 'Veuillez renseigner votre Adresse.';
-      }
-  };
-
-  //validation de la ville
-  const validCity = function(inputCity) {
-      let cityErrorMsg = inputCity.nextElementSibling;
-
-      if (charRegExp.test(inputCity.value)) {
-          cityErrorMsg.innerHTML = '';
-      } else {
-          cityErrorMsg.innerHTML = 'Veuillez renseigner votre Ville.';
-      }
-  };
-}
-getForm(); 
 // crée le corps de la requête
 function makeRequestBody() {
   const form = document.querySelector(".cart__order__form")
@@ -330,7 +307,7 @@ function makeRequestBody() {
   const address = form.elements.address.value
   const city = form.elements.city.value
   const email = form.elements.email.value
-  const body = { 
+  const body = {
     // je mets les valeurs du formulaire et les produits sélectionnés
     // dans un objet...
     contact: {
@@ -340,20 +317,19 @@ function makeRequestBody() {
       city: city,
       email: email
     },
-  products: getIdsFromCache() 
+    products: getIdsFromCache()
   }
   return body
 }
-  //Construction d'un array d'id depuis le local storage
+
+//Construction d'un array d'id depuis le local storage
 function getIdsFromCache() {
   const numberOfProducts = localStorage.length
   const ids = []
   for (let i = 0; i < numberOfProducts; i++) {
-  const key = localStorage.key(i)
+    const key = localStorage.key(i)
     const id = key.split("-")[0]
     ids.push(id)
   }
   return ids
-  }
-
-
+}

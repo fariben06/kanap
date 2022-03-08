@@ -79,7 +79,7 @@ function handleClick() {
     //si la commande "couleur" "quantité"  n'est pas valide "return"
     if (isOrderInValid(color, quantity)) return
     saveOrder(color, quantity) // enregistre la couleur de la commande, et la quantité
-    redirectToCart()  // rediriger vers le panier 
+    redirectToCart()  // rediriger vers le panier
 }
     // sauvegarder le detail de la commande
 function saveOrder(color, quantity) {
@@ -93,8 +93,18 @@ function saveOrder(color, quantity) {
         altTxt: altText,
         name: articleName
     }
-    localStorage.setItem(key, JSON.stringify(data))
+
+    const item = JSON.parse(localStorage.getItem(`${id}-${color}`));
+
+    if (item === null) {
+        localStorage.setItem(key, JSON.stringify(data))
+    } else {
+        item.quantity += data.quantity;
+        localStorage.setItem(key, JSON.stringify(item))
+    }
 }
+
+
 function isOrderInValid(color, quantity) {
      if (color == null || color === "" || quantity == null || quantity == 0) {
         //  alert("veuillez sélectionner une couleur et une quantité")

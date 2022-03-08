@@ -34,9 +34,9 @@ function addProducts(data) {
    appendArticleToAnchor(anchor, article)
    })
 }
-
+    // ajouter des éléments au tableau d'articles
 function appendElementsToArticle(article, array) {
-    array.forEach((items) => {
+    array.forEach((items) => { //un tableau pour chaque élément
         article.appendChild(items)
     })
      //article.appendChild(image)
@@ -50,16 +50,16 @@ function makeAnchor(id) {
   anchor.href = "./product.html?id=" +id
   return anchor
 }
-  // fonction ajoute l'article à l'ancre
+  //ajoute l'article à l'article d'ancrage
   // Insertion de l'élément "article"
 function appendArticleToAnchor(anchor, article) { 
      const items = document.querySelector("#items") 
     if (items != null) {
         items.appendChild(anchor)
         anchor.appendChild(article)
+    // Si les éléments sont nuls éléments ajouter éléments Ancrage enfant 
     }
 }
-
  // Insertion de l'image
 function makeImageDiv(imageUrl, altTxt) {
     const image = document.createElement("img")
@@ -67,7 +67,7 @@ function makeImageDiv(imageUrl, altTxt) {
     image.alt = altTxt
     image.removeAttribute("title")
     image.removeAttribute("style")
-    return image
+    return image // image supprimer le titre et le  style  de d'attribut
 }
 
     // Insertion du titre "h3"
@@ -82,6 +82,8 @@ function makeH3(name) {
 function makeParagraph(description) {
     const p = document.createElement("p")
     p.textContent = description
+    // p texte Contenu = description
     p.classList.add("productDescription")
+    // p class List ajouter produit Description
     return p
 }
