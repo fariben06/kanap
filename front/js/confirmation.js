@@ -3,6 +3,7 @@ const orderId = getOrderId()
 // affiche l'identifiant de la commande
 displayOrderId(orderId)
 
+
 // obtenir l'identifiant de la commande
 function getOrderId() {
     // chaîne de requête = window.location.search
@@ -12,6 +13,7 @@ function getOrderId() {
     // renvoie les paramètres d'url pour obtenir l'identifiant de la commande
     return urlParams.get("orderId")
 }
+
 
     // affiche l'identifiant de la commande
 function displayOrderId(orderId) {
