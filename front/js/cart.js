@@ -267,17 +267,17 @@ const fields = [
   {
     input: form.elements.address,
     regexp: addressRegExp,
-    message: 'Veuillez saisir un adresse valide.'
+    message: 'Veuillez saisir une adresse valide.'
   },
   {
     input: form.elements.city,
     regexp: charRegExp,
-    message: 'Veuillez saisir un ville valide.'
+    message: 'Veuillez saisir une ville valide.'
   },
   {
     input: form.elements.email,
     regexp: emailRegExp,
-    message: 'Veuillez saisir une email valide.'
+    message: 'Veuillez saisir une adresse mail valide.'
   },
 ];
 
