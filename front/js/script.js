@@ -1,3 +1,4 @@
+
 //Création des articles via la liste (console)
 
 fetch("http://localhost:3000/api/products")

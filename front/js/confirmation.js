@@ -1,3 +1,4 @@
+
 //Récupération de l'id via les paramètres de l'url
 const orderId = getOrderId()
 // affiche l'identifiant de la commande

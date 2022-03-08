@@ -184,6 +184,7 @@ function displayArticle(article) {
   document.querySelector("#cart__items").appendChild(article)
 }
 
+// crée un élément article
 function makeArticle(item) {
   const article = document.createElement("article")
   article.classList.add("card__item")
@@ -281,6 +282,7 @@ const fields = [
   },
 ];
 
+// fonction champ valide
 function valid(field) {
   let errorMsg = field.input.nextElementSibling;
 
@@ -293,6 +295,7 @@ function valid(field) {
   return false;
 }
 
+// ajouter un écouteur d'événement
 fields.forEach(field => {
   field.input.addEventListener('input', () => {
     valid(field);
