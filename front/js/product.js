@@ -1,4 +1,3 @@
-
 //Récupération de l'id via les paramètres de l'url
 
 const queryString = window.location.search
